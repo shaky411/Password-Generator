@@ -88,20 +88,83 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// Function to prompt user for password options
+
+
+
+// Function to prompt user for password options stored in an object
+// Maybe I could store these differntly?
+
+
 function getPasswordOptions() {
 
+  
+
+  // This is the way I understand how to write objects
+  let options = {
+    
+    length: prompt("enter a number between 10-64"),
+    lowerCase: confirm("would you like lowercase characters?"),
+    upperCase: confirm("would you like uppercase characters?"),
+    numeric: confirm("would you like numeric characters?"),
+    specialCharacters: confirm("would you like special characters?"),
+    // error: alert("Try again")
+  }
+
+  // let options = {};
+  // options.length = prompt("Enter desired password length between (10-64");
+  // options.lowerCase = confirm("Include lowercase characters?");
+  // options.upperCase = confirm("Include uppercase characters?");
+  // options.numeric = confirm("Include numeric characters");
+  // options.specialCharacters = confirm("Include special characters");
+
+  return options;
+  
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+  let randomCharacter = Math.floor(Math.random() * arr.length);
+  return arr[randomCharacter];
 
 }
+
+let bigArray = []
+let generatedPassword = "";
+let alertShown = false;
+
 
 // Function to generate password with user input
 function generatePassword() {
+  const passwordOptions = getPasswordOptions();
+
+  // if (passwordOptions.length < 10 && passwordOptions.length > 64) {
+  //   return errorMessage;
+  // }
+
+  if (passwordOptions.lowerCase) {
+    bigArray = bigArray.concat(lowerCasedCharacters);
+  } 
+  if (passwordOptions.upperCase) {
+    bigArray = bigArray.concat(upperCasedCharacters);
+  }
+  if (passwordOptions.numeric) {
+    bigArray = bigArray.concat(numericCharacters);
+  }
+  if (passwordOptions.specialCharacters) {
+    bigArray = bigArray.concat(specialCharacters);
+  }
+
+// select random character from the bigArray depending on length chosen by user
+for (let i = 0; i < passwordOptions.length; i++) {
+  generatedPassword += getRandom(bigArray);
+}
+
+return generatedPassword; 
 
 }
+
+
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
@@ -111,8 +174,47 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
 
-  passwordText.value = password;
+    passwordText.value = generatedPassword; 
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+
+
+
+
+// Function to prompt user for password options
+// function getPasswordOptions() {
+//   let bigArray = []
+//   let lengthOfPassword = window.prompt("How many Characters you want your password to be ? 10-64 ")
+//   if (lengthOfPassword < 64 && lengthOfPassword > 10) {
+//     let lowerCase = confirm("Do you wish to include lower case characters?")
+//     console.log(lowerCase)
+//     //concat this to big array
+//     if (lowerCase === true) {
+//       bigArray = bigArray.concat(lowerCasedCharacters)
+//     }
+//     let upperCase = confirm("Do you wish to include upper lower case characters?")
+//     console.log(upperCase)
+//     //concat this to big array
+//     if (upperCase === true) {
+//       bigArray = bigArray.concat(upperCasedCharacters)
+//     }
+//     let numericsQ = confirm("Do you wish to include Numbers?")
+//     console.log(numericsQ)
+//     //concat this to big array
+//     if (numericsQ === true) {
+//       bigArray = bigArray.concat(numericCharacters)
+//     }
+//     let specialsQ = confirm("Do you wish to include Special characters?")
+//     console.log(specialsQ)
+//     //concat this to big array
+//     if (specialsQ === true) {
+//       bigArray = bigArray.concat(specialCharacters)
+//     }
+//     return bigArray;
+//   } else {
+//     window.alert("Wrong number of characters entered, refresh and try again please! And make sure to have number between 10 and 64 !")
+//   }
+// }
