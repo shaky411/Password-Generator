@@ -89,33 +89,20 @@ var upperCasedCharacters = [
 ];
 
 
-
-
 // Function to prompt user for password options stored in an object
 // Maybe I could store these differntly?
 
 
 function getPasswordOptions() {
 
-  
-
   // This is the way I understand how to write objects
   let options = {
-    
     length: prompt("enter a number between 10-64"),
     lowerCase: confirm("would you like lowercase characters?"),
     upperCase: confirm("would you like uppercase characters?"),
     numeric: confirm("would you like numeric characters?"),
-    specialCharacters: confirm("would you like special characters?"),
-    // error: alert("Try again")
+    specialCharacters: confirm("would you like special characters?")
   }
-
-  // let options = {};
-  // options.length = prompt("Enter desired password length between (10-64");
-  // options.lowerCase = confirm("Include lowercase characters?");
-  // options.upperCase = confirm("Include uppercase characters?");
-  // options.numeric = confirm("Include numeric characters");
-  // options.specialCharacters = confirm("Include special characters");
 
   return options;
   
@@ -141,6 +128,9 @@ function generatePassword() {
   //   return errorMessage;
   // }
 
+  const errorMessage = "Enter between 10 & 64 characters";
+
+  
   if (passwordOptions.lowerCase) {
     bigArray = bigArray.concat(lowerCasedCharacters);
   } 
@@ -155,12 +145,15 @@ function generatePassword() {
   }
 
 // select random character from the bigArray depending on length chosen by user
-for (let i = 0; i < passwordOptions.length; i++) {
-  generatedPassword += getRandom(bigArray);
+if (passwordOptions.length <10 || passwordOptions.length >64) {
+  alert(errorMessage);
+} else {
+  for (let i = 0; i < passwordOptions.length; i++) {
+    generatedPassword += getRandom(bigArray);
+}
 }
 
-return generatedPassword; 
-
+return generatedPassword;
 }
 
 
@@ -171,10 +164,14 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
+
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
 
     passwordText.value = generatedPassword; 
+
+
+    
 }
 
 // Add event listener to generate button
