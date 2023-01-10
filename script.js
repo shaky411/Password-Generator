@@ -123,7 +123,7 @@ let alertShown = false;
 function generatePassword() {
 
   const passwordOptions = getPasswordOptions();
-  const errorMessage = "Please enter at least 10 characters but no more than 64";
+  const errorMessage = "INVALID SELECTION: Please enter at least 10 characters but no more than 64";
 
   // if (passwordOptions.length < 10 && passwordOptions.length > 64) {
   //   return errorMessage;
