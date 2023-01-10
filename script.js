@@ -92,7 +92,7 @@ var upperCasedCharacters = [
 // Function to prompt user for password options stored in an object
 // Maybe I could store these differntly?
 
-
+// Does this need to be a function or could I just use an object??? Could make my code
 function getPasswordOptions() {
 
   // This is the way I understand how to write objects
@@ -105,32 +105,30 @@ function getPasswordOptions() {
   }
 
   return options;
-  
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  let randomCharacter = Math.floor(Math.random() * arr.length);
-  return arr[randomCharacter];
-
+  let randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
 
-let bigArray = []
+// Variables for storing the random array & generated password
+let bigArray = [];
 let generatedPassword = "";
 let alertShown = false;
 
-
 // Function to generate password with user input
 function generatePassword() {
+
   const passwordOptions = getPasswordOptions();
+  const errorMessage = "Please enter at least 10 characters but no more than 64";
 
   // if (passwordOptions.length < 10 && passwordOptions.length > 64) {
   //   return errorMessage;
   // }
 
-  const errorMessage = "Enter between 10 & 64 characters";
-
-  
   if (passwordOptions.lowerCase) {
     bigArray = bigArray.concat(lowerCasedCharacters);
   } 
@@ -157,61 +155,16 @@ return generatedPassword;
 }
 
 
-
-
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
 
     passwordText.value = generatedPassword; 
-
-
-    
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
-
-
-
-
-
-// Function to prompt user for password options
-// function getPasswordOptions() {
-//   let bigArray = []
-//   let lengthOfPassword = window.prompt("How many Characters you want your password to be ? 10-64 ")
-//   if (lengthOfPassword < 64 && lengthOfPassword > 10) {
-//     let lowerCase = confirm("Do you wish to include lower case characters?")
-//     console.log(lowerCase)
-//     //concat this to big array
-//     if (lowerCase === true) {
-//       bigArray = bigArray.concat(lowerCasedCharacters)
-//     }
-//     let upperCase = confirm("Do you wish to include upper lower case characters?")
-//     console.log(upperCase)
-//     //concat this to big array
-//     if (upperCase === true) {
-//       bigArray = bigArray.concat(upperCasedCharacters)
-//     }
-//     let numericsQ = confirm("Do you wish to include Numbers?")
-//     console.log(numericsQ)
-//     //concat this to big array
-//     if (numericsQ === true) {
-//       bigArray = bigArray.concat(numericCharacters)
-//     }
-//     let specialsQ = confirm("Do you wish to include Special characters?")
-//     console.log(specialsQ)
-//     //concat this to big array
-//     if (specialsQ === true) {
-//       bigArray = bigArray.concat(specialCharacters)
-//     }
-//     return bigArray;
-//   } else {
-//     window.alert("Wrong number of characters entered, refresh and try again please! And make sure to have number between 10 and 64 !")
-//   }
-// }
