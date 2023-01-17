@@ -92,7 +92,7 @@ var upperCasedCharacters = [
 // Function to prompt user for password options stored in an object
 // Maybe I could store these differntly?
 
-// Does this need to be a function or could I just use an object??? Could make my code
+// Does this need to be a function or could I just use an object???
 function getPasswordOptions() {
 
   // This is the way I understand how to write objects
@@ -107,6 +107,11 @@ function getPasswordOptions() {
   return options;
 }
 
+function empty(arr) {
+  bigArray = [];
+}
+
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -118,10 +123,17 @@ function getRandom(arr) {
 let bigArray = [];
 let generatedPassword = "";
 let alertShown = false;
+let emptyArray = [];
+
+
 
 // Function to generate password with user input
 function generatePassword() {
 
+  // generatedPassword = [];
+  
+  
+  
   const passwordOptions = getPasswordOptions();
   const errorMessage = "INVALID SELECTION: Please enter at least 10 characters but no more than 64";
 
@@ -147,12 +159,17 @@ if (passwordOptions.length <10 || passwordOptions.length >64) {
   alert(errorMessage);
 } else {
   for (let i = 0; i < passwordOptions.length; i++) {
-    generatedPassword += getRandom(bigArray);
-}
+    generatedPassword += getRandom(bigArray);   
 }
 
-return generatedPassword;
 }
+
+
+return generatedPassword;
+
+}
+
+
 
 
 // Get references to the #generate element
@@ -162,9 +179,10 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
-
+  
     passwordText.value = generatedPassword; 
 }
+
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
